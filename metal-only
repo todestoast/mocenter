@@ -17,17 +17,25 @@ sleep $DAUER
 killall mplayer
 
 mv ~/stream.dump ~/"$datei"
+                ;;
+      --recordlater|-rl)
+export WARTEN="$2"
+sleep $WARTEN
 
       ;;
       --exit|-x)
       exit
       ;;
       --help|-h)
-      echo "Hilfe Menü"
-echo " Verwendung: metal-only -parameter / --longparameter"
+#      echo "Hilfe Menü"
+echo " Verwendung: "
+echo "metal-only --parameter / --longparameter "
 echo "Parameter:"
-echo " -r / --record * [Aufnahme des streams für festgelgte Zeit *]"
-echo "'*' ist hierbei durch die Zeit zu ersetzen: *m *s *h [*m = *minuten; *s = *sekunden; *h = *Stunden]"
+echo " -r / --record * [Aufnahme des Streams für festgelgte Zeit *]"
+echo "'*' ist hierbei durch die Zeit zu ersetzen: *h *m *s [*h = *Stunden; *m = *Minuten; *s = *Sekunden]"
+echo " -rl | --recordlater * [Aufnahme des Streams ab bestimmtem Zeitpunkt]"
+echo "'*' ist hierbei durch die Zeit bis zum Beginn der Aufnahme zu ersetzen: *h *m *s [*h = *Stunden; *m = *Minuten; *s = *Sekunden]"
+echo "Um das Aufnehmen zu starten, muss der Parameter -r übergeben werden (siehe -r / --record)"
 echo "-x / --exit [Beenden des Scripts nach dem Ausführen der vorangegangenen Parameter]"
 echo "Parameter hinter -x werden nicht mehr Berücksichtigt!"
 echo "-h / --help [Zeigt dieses Menü an]"
@@ -64,9 +72,9 @@ fi
        fi
       ;;
                 --version|-v)
-                echo "Version: 1.01"
+                echo "Version: 1.1 beta"
 echo "Änderungen: "
-echo "Hinzugefügte Optionen: Aufnahme, Anzeigen des Sendeplans, Wiedergabe der Aufnahme, Aufrufen der Homepage, verbesserte Darstellung des Sendeplans"
+echo "Hinzugefügte Optionen: Verbesserte Darstellung von --help; Aufnahme ab bestimmtem Zeitpunkt mit -rl; Aufrufen des Sendeplans auf der Homepage"
 echo "'/bin/bash' - Script"
 echo "-------------------------------------------------------------------------------------------------------------------------------------------"
 echo "Kontakt für Fehlerberichte: "
@@ -74,9 +82,25 @@ echo "mail an sebi@tuximail.de oder Nachricht an Todestoast im Metal Only Forum"
 echo "-------------------------------------------------------------------------------------------------------------------------------------------"
 echo "Denk immer daran: Metal Only braucht jede Spende!"
                 ;;
-      --debug-level|-debug-level)
-      setDebugLevel $2
-      shift
+      --homepage-plan|-hp-plan)
+if [[ -f $(which firefox 2>/dev/null) ]]
+    then
+        firefox www.metal-only.de/?action=plan
+    else
+        if [[ -f $(which chromium 2>/dev/null) ]]
+          then 
+            chromium www.metal-only.de/?action=plan
+          else
+            if   [[ -f $(which opera 2>/dev/null) ]]
+              then
+                opera www.metal-only.de/?action=plan
+                else
+                  echo "Ihr Browser konnte leider nicht ermittelt werden!"
+                  echo "Zur Fehlerbehebung beschreiben Sie das Problem in einer e-mail an mich!"
+                  exec metal-only -v
+fi
+   fi
+      fi
       ;;
    esac
    shift
