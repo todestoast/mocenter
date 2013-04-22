@@ -7,7 +7,7 @@ Author: Sebastian Junger
 e-mail: sebi@tuximail.de
 Homepage: http://www.tuximail.de
 Blog: https://tuxiblog.wordpress.com
-Licence: WTFPL (http://www.wtfpl.net/)
+Licence: WTFPL (http://www.wtfpl.net/) For mo see the File LICENCE.md
 
 
 Dieses Script ermoeglicht das Abspielen des Radiostreams von metal-only.de, sowie das Anzeigen des Sendeplans.
