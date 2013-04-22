@@ -1,0 +1,91 @@
+#!/bin/bash
+
+while test "$1" != ""
+do
+   case $1 in
+      --record|-r)
+
+      url='http://metal-only.de/listen.pls'
+
+
+export DAUER="$2"
+
+export datei="$(mplayer -frames 0 -quiet "$url" 2>&1 | awk -F\'  '/^ICY Info/{print $2}')"
+
+mplayer -quiet -dumpstream $url &
+sleep $DAUER
+killall mplayer
+
+mv ~/stream.dump ~/"$datei"
+
+      ;;
+      --exit|-x)
+      exit
+      ;;
+      --help|-h)
+      echo "Hilfe Menü"
+echo " Verwendung: metal-only -parameter / --longparameter"
+echo "Parameter:"
+echo " -r / --record * [Aufnahme des streams für festgelgte Zeit *]"
+echo "'*' ist hierbei durch die Zeit zu ersetzen: *m *s *h [*m = *minuten; *s = *sekunden; *h = *Stunden]"
+echo "-x / --exit [Beenden des Scripts nach dem Ausführen der vorangegangenen Parameter]"
+echo "Parameter hinter -x werden nicht mehr Berücksichtigt!"
+echo "-h / --help [Zeigt dieses Menü an]"
+echo "-p / --plan [Zeigt den wöchentlichen Sendeplan von Metal Only an]"
+echo "-pr / --playrecord [Spielt die zuvor mit -r aufgenommene Sendung ab]"
+echo "Kann nicht verwendet werden, wenn keine Sendung mit -r aufgenommen wurde!"
+echo "-hp / --homepage [Ruft die Startseite www.metal-only.de im Standardbrowser auf]"
+echo "-v / --version [Zeigt die Nummer der Version und deren Änderung sowie die Kontaktdaten an]"
+      ;;
+      --plan|-p)
+      curl -s "http://www.metal-only.de/?action=plan" |w3m -dump -T text/html|head -n 20
+      ;;
+      --playrecord|-pr)
+      mplayer ~/"$datei"
+      ;;
+      --homepage|-hp)
+if [[ -f $(which firefox 2>/dev/null) ]]
+    then
+   firefox www.metal-only.de
+    else
+   if [[ -f $(which chromium 2>/dev/null) ]]
+     then 
+       chromium www.metal-only.de
+     else
+       if   [[ -f $(which opera 2>/dev/null) ]]
+         then
+      opera www.metal-only.de
+      else
+        echo "Ihr Browser konnte leider nicht ermittelt werden!"
+        echo "Zur Fehlerbehebung beschreiben Sie das Problem in einer e-mail an mich!"
+        exec metal-only -v
+fi
+   fi
+       fi
+      ;;
+                --version|-v)
+                echo "Version: 1.0 beta"
+echo "Änderungen: "
+echo "Hinzugefügte Optionen: Aufnahme, Anzeigen des Sendeplans, Wiedergabe der Aufnahme, Aufrufen der Homepage"
+echo "'/bin/bash' - Script"
+echo "-------------------------------------------------------------------------------------------------------------------------------------------"
+echo "Kontakt für Fehlerberichte: "
+echo "mail an sebi@tuximail.de oder Nachricht an Todestoast im Metal Only Forum"
+echo "-------------------------------------------------------------------------------------------------------------------------------------------"
+echo "Denk immer daran: Metal Only braucht jede Spende!"
+                ;;
+      --debug-level|-debug-level)
+      setDebugLevel $2
+      shift
+      ;;
+   esac
+   shift
+done
+
+url='http://metal-only.de/listen.pls'
+
+while read -r line
+do
+        date +%H:%M:%S
+        echo "$line" | sed -r "s/.*StreamTitle='([^']+)'.*/\1/"
+done < <(mplayer -quiet "$url" 2>&1 | sed -nu '/^ICY/ p')
