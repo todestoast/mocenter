@@ -5,8 +5,7 @@ do
    case $1 in
       --record|-r)
 
-      url='http://metal-only.blitz-stream.de:6666'
-
+   url='http://metal-only.blitz-stream.de:4400'
 
 export DAUER="$2"
 
@@ -16,8 +15,8 @@ export DAUER="$2"
 streamripper $url &
 sleep $DAUER
 killall streamripper
-mv METAL\ ONLY\ -\ http---www.metal-only.de\ -\ 24h\ Black\ Death\ Heavy\ Metal\ Rock\ und\ mehr/incomplete/* $HOME
-rm -r METAL\ ONLY\ -\ http---www.metal-only.de\ -\ 24h\ Black\ Death\ Heavy\ Metal\ Rock\ und\ mehr/
+#mv METAL\ ONLY\ -\ http---www.metal-only.de\ -\ 24h\ Black\ Death\ Heavy\ Metal\ Rock\ und\ mehr/incomplete/* $HOME
+#rm -r METAL\ ONLY\ -\ http---www.metal-only.de\ -\ 24h\ Black\ Death\ Heavy\ Metal\ Rock\ und\ mehr/
 #mv ~/stream.dump ~/"$datei"
                 ;;
       --recordlater|-rl)
@@ -59,7 +58,7 @@ if [[ -f $(which firefox 2>/dev/null) ]]
    firefox www.metal-only.de
     else
    if [[ -f $(which chromium 2>/dev/null) ]]
-     then 
+     then
        chromium www.metal-only.de
      else
        if   [[ -f $(which opera 2>/dev/null) ]]
@@ -74,9 +73,9 @@ fi
        fi
       ;;
                 --version|-v)
-                echo "Version: 1.2 "
+                echo "Version: 1.3 "
 echo "Änderungen: "
-echo "Hinzugefügte Optionen: Streamaufzeichnung per 'streamripper' - behebt den mplayer streamdump bug"
+echo "Port der Variable 'url' angepasst, da der Stream sonst nicht mehr geht!"
 echo "'/bin/bash' - Script"
 echo "-------------------------------------------------------------------------------------------------------------------------------------------"
 echo "Kontakt für Fehlerberichte: "
@@ -90,7 +89,7 @@ if [[ -f $(which firefox 2>/dev/null) ]]
         firefox www.metal-only.de/?action=plan
     else
         if [[ -f $(which chromium 2>/dev/null) ]]
-          then 
+          then
             chromium www.metal-only.de/?action=plan
           else
             if   [[ -f $(which opera 2>/dev/null) ]]
@@ -108,7 +107,8 @@ fi
    shift
 done
 
-url='http://metal-only.blitz-stream.de:6666'
+
+url='http://metal-only.blitz-stream.de:4400'
 
 while read -r line
 do
