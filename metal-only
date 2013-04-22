@@ -38,7 +38,7 @@ echo "-hp / --homepage [Ruft die Startseite www.metal-only.de im Standardbrowser
 echo "-v / --version [Zeigt die Nummer der Version und deren Änderung sowie die Kontaktdaten an]"
       ;;
       --plan|-p)
-      curl -s "http://www.metal-only.de/?action=plan" |w3m -dump -T text/html|head -n 20
+      curl -s "http://www.metal-only.de/?action=plan" |w3m -dump -T text/html|head -n 20|cut -c 31-108
       ;;
       --playrecord|-pr)
       mplayer ~/"$datei"
@@ -64,9 +64,9 @@ fi
        fi
       ;;
                 --version|-v)
-                echo "Version: 1.0 beta"
+                echo "Version: 1.01"
 echo "Änderungen: "
-echo "Hinzugefügte Optionen: Aufnahme, Anzeigen des Sendeplans, Wiedergabe der Aufnahme, Aufrufen der Homepage"
+echo "Hinzugefügte Optionen: Aufnahme, Anzeigen des Sendeplans, Wiedergabe der Aufnahme, Aufrufen der Homepage, verbesserte Darstellung des Sendeplans"
 echo "'/bin/bash' - Script"
 echo "-------------------------------------------------------------------------------------------------------------------------------------------"
 echo "Kontakt für Fehlerberichte: "
