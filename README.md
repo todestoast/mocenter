@@ -13,6 +13,8 @@ Licence: WTFPL (http://www.wtfpl.net/)
 Dieses Script ermoeglicht das Abspielen des Radiostreams von metal-only.de, sowie das Anzeigen des Sendeplans.
 Homepage von metal-only: http://www.metal-only.de
 
+Abhaengigkeiten: w3m,curl,git,streamripper,mplayer
+
 Hilfe Menü
  Verwendung: metal-only -parameter / --longparameter
 Parameter:
