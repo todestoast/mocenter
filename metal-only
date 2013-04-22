@@ -10,13 +10,15 @@ do
 
 export DAUER="$2"
 
-export datei="$(mplayer -frames 0 -quiet "$url" 2>&1 | awk -F\'  '/^ICY Info/{print $2}')"
+#export datei="$(mplayer -frames 0 -quiet "$url" 2>&1 | awk -F\'  '/^ICY Info/{print $2}')"
 
-mplayer -quiet -dumpstream $url &
+#mplayer -quiet -dumpstream $url &
+streamripper $url &
 sleep $DAUER
-killall mplayer
-
-mv ~/stream.dump ~/"$datei"
+killall streamripper
+mv METAL\ ONLY\ -\ http---www.metal-only.de\ -\ 24h\ Black\ Death\ Heavy\ Metal\ Rock\ und\ mehr/incomplete/* $HOME
+rm -r METAL\ ONLY\ -\ http---www.metal-only.de\ -\ 24h\ Black\ Death\ Heavy\ Metal\ Rock\ und\ mehr/
+#mv ~/stream.dump ~/"$datei"
                 ;;
       --recordlater|-rl)
 export WARTEN="$2"
@@ -72,9 +74,9 @@ fi
        fi
       ;;
                 --version|-v)
-                echo "Version: 1.1 beta"
+                echo "Version: 1.2 "
 echo "Änderungen: "
-echo "Hinzugefügte Optionen: Verbesserte Darstellung von --help; Aufnahme ab bestimmtem Zeitpunkt mit -rl; Aufrufen des Sendeplans auf der Homepage"
+echo "Hinzugefügte Optionen: Streamaufzeichnung per 'streamripper' - behebt den mplayer streamdump bug"
 echo "'/bin/bash' - Script"
 echo "-------------------------------------------------------------------------------------------------------------------------------------------"
 echo "Kontakt für Fehlerberichte: "
