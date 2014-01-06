@@ -8,6 +8,7 @@ do
    url='http://metal-only.blitz-stream.de:4400'
 
 export DAUER="$2"
+export datei='METAL ONLY - www.metal-only.de - 24h Black Death Heavy Metal Rock und mehr!'
 
 #export datei="$(mplayer -frames 0 -quiet "$url" 2>&1 | awk -F\'  '/^ICY Info/{print $2}')"
 
@@ -15,6 +16,10 @@ export DAUER="$2"
 streamripper $url &
 sleep $DAUER
 killall streamripper
+ cd ~/"$datei"/
+ rm -r incomplete
+ ls -c -r *.mp3 > ordered.mo
+ cd
 #mv METAL\ ONLY\ -\ http---www.metal-only.de\ -\ 24h\ Black\ Death\ Heavy\ Metal\ Rock\ und\ mehr/incomplete/* $HOME
 #rm -r METAL\ ONLY\ -\ http---www.metal-only.de\ -\ 24h\ Black\ Death\ Heavy\ Metal\ Rock\ und\ mehr/
 #mv ~/stream.dump ~/"$datei"
@@ -50,7 +55,8 @@ echo "-v / --version [Zeigt die Nummer der Version und deren Änderung sowie die
       curl -s "http://www.metal-only.de/?action=plan" |w3m -dump -T text/html|head -n 20|cut -c 31-108
       ;;
       --playrecord|-pr)
-      mplayer ~/"$datei"
+      mplayer -playlist ~/"$datei"/ordered.mo
+      cd
       ;;
       --homepage|-hp)
 if [[ -f $(which firefox 2>/dev/null) ]]
