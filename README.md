@@ -3,9 +3,7 @@ mocenter
 
 Metal Only Center
 Date: 22.04.2013
-Author: Sebastian Junger
 e-mail: sebi@tuximail.de
-Homepage: http://www.tuximail.de
 Licence: WTFPL (http://www.wtfpl.net/) For mo see the File LICENCE.md
 
 
