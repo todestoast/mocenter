@@ -5,7 +5,7 @@ do
    case $1 in
       --record|-r)
 
-   url='http://metal-only.blitz-stream.de:4400'
+   url='http://server1.blitz-stream.de:4400'
 
 export DAUER="$2"
 export datei='METAL ONLY - www.metal-only.de - 24h Black Death Heavy Metal Rock und mehr!'
