@@ -3,7 +3,7 @@ mocenter
 
 Metal Only Center
 Date: 22.04.2013
-e-mail: sebi@tuximail.de
+e-mail: sebi [ät} tuximail [punkt] de
 Licence: WTFPL (http://www.wtfpl.net/) For mo see the File LICENCE.md
 
 
